@@ -1,0 +1,6 @@
+#week notes
+library(tidyverse)
+#example code:
+sloth_speed <- sloth_df %>%
+               select(id, age, speed)
+
