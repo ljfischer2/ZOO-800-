@@ -45,3 +45,11 @@ library(LakeMetabolizer)
 
 
 lakes$DO_sat <- o2.at.sat.base (temp = lakes$Temp_C,baro=1000, altitude = 0, salinity = rep(0, length(Temp_C)),  model = "garcia-benson") 
+
+
+# Part5 
+#2. Revisit your lakes data frame. Use apply() to calculate the range (max – min) of each  numeric column.
+numeric_cols <- sapply(lakes, is.numeric)
+ranges <- apply(lakes[, numeric_cols],2,function(x) rev(range(x)))
+ranges
+
