@@ -59,7 +59,7 @@ print(lake_means)
 
 
 #example list of multiple data types
-test_list <- list(Mendota, data.frame(d = (c(1:3)),
-                                      x = (c(4:6)),
-                                      y = (c(7:9))),
-                  Waubesa)
+#test_list <- list(Mendota, data.frame(d = (c(1:3)),
+#                                      x = (c(4:6)),
+#                                      y = (c(7:9))),
+#                                      Waubesa)
