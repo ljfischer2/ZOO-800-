@@ -151,3 +151,24 @@ print(lake_means)
 #                                      x = (c(4:6)),
 #                                      y = (c(7:9))),
 #                                      Waubesa)
+
+
+#Part 5####
+
+#Part 5
+
+#mean chlorophyll concentrations (across 3 days) for each depth
+means_depths <- apply(chlorophyll_conc, 1, mean)
+means_depths
+
+#mean chlorophyll concentrations (across 3 depths) for each day
+means_days <- apply(chlorophyll_conc, 2, mean)
+means_days
+
+
+
+# Part5 
+#2. Revisit your lakes data frame. Use apply() to calculate the range (max – min) of each  numeric column.
+numeric_cols <- sapply(lakes, is.numeric)
+ranges <- apply(lakes[, numeric_cols],2,function(x) rev(range(x)))
+ranges
