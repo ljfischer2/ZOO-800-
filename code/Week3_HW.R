@@ -1,22 +1,40 @@
 #Part 1####
+# Hi, Lucas here.  I think these lines are beyond the need of comments here, as
+# it all makes sense and is obvious to me.
+# still, I am going to double check all of the code chunks and make sure that 
+# even a spiny water flea could figure this stuff out.  This was not my part, 
+# but I kind of like commenting in code.  It makes it feel personal.
 
+# Also, Sunday scaries hit hard, and I am in that mind-state of "fuck it, we're 
+# in grad school.  PIs and Profs like to have fun too."  give them some fun code
+# to read through.  Also I am doing this to ignore actual responsibility.  Lots 
+# of grading for BIO 151 to do.
+
+
+
+#storing variables, and math.
 temp_C <- 18.5
 temp_F = temp_C * (9/5)+ 32
 
+#Print lines, saving a paste as a variable
 temp_state <- paste("The water temperature is", temp_C, "°C (", temp_F," °F)") 
 print(temp_state)
 
 
 #Part 2####
-
+#populate the vector, give them names
 species_counts <- c(Bluegill = 12, Bass = 7, Sunfish = 21, Carp = 3)
 
+#Math and math functions
 fish_counted <- sum(species_counts)
 fish_counted
 
 highest_count <- max(species_counts)
 highest_count_species <- names(which.max(species_counts))
 
+
+# creating a matrix.  Haven't worked with matrices in a long time.
+# I miss math class from being a kid.  Such a simple time.
 chlorophyll_conc <- matrix(c(21, 22, 23, 24, 25, 26, 27, 28, 29), nrow = 3, ncol = 3)
 rownames(chlorophyll_conc) <- c("Surface", "Mid", "Bottom")
 colnames(chlorophyll_conc) <- c("Day 1", "Day 2", "Day 3")
@@ -75,17 +93,14 @@ lakes$Temp_F <- lakes$Temp_C *9/5+32
 
 library(LakeMetabolizer)
 
-
-lakes$DO_sat <- o2.at.sat.base (temp = lakes$Temp_C,baro=1000, altitude = 0, salinity = rep(0, length(Temp_C)),  model = "garcia-benson") 
-
-
-# Part5 
-#2. Revisit your lakes data frame. Use apply() to calculate the range (max – min) of each  numeric column.
-numeric_cols <- sapply(lakes, is.numeric)
-ranges <- apply(lakes[, numeric_cols],2,function(x) rev(range(x)))
-ranges
-          
-
+#Hi, Lucas again.  Not really sure wtf this function is, but looks fun!
+# Also, I made the data neater here.
+lakes$DO_sat <- o2.at.sat.base (temp = lakes$Temp_C,
+                                baro=1000, 
+                                altitude = 0, 
+                                salinity = rep(0, length(Temp_C)),  
+                                model = "garcia-benson") 
+# I assume this predicts O2 at a given temp, pressure, altitude, and salinity.
 
 
 #Part 4####
@@ -105,6 +120,7 @@ for  (value in squares) {
 n0 <- 10
 r = 0.3
 t <- c(0:10)
+
 #neat trick I learned for making an empty vector.
 pop <- vector('numeric', 10L)
 
