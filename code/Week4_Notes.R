@@ -106,3 +106,9 @@ multi.size.at.age(linf, k, t0, t)
 # you can create a script for only the functions you need.
 
 
+
+
+
+
+
+
