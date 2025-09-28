@@ -1,7 +1,7 @@
-install.packages("palmerpenguins")
+#install.packages("palmerpenguins")
 library("palmerpenguins")
 library(dplyr)
-rm(list = ls())
+#rm(list = ls())
 #Objective 1#####
 
 #creating data.frame from penguins
@@ -17,7 +17,7 @@ bodymass.size <- function(column1, column2, m) {
   column2 <- ifelse(column1 > m, "large", "small")
   print(column2)
 }
-#running it or penguins
+#running it for penguins
 peng$size_class <- bodymass.size(peng$body_mass_g, peng$size_class, m)
 
 
@@ -72,7 +72,7 @@ peng$size_class <- bodymass.size2(peng$body_mass_g, peng$size_class,
 #  }
 #}
 
-test
+#test
 
 #Objective 3, 4, 5 (I actually sort of did part 5without meaning to, the only
 # thing missing is the species list, but that is probably fine.  Whoever uses
