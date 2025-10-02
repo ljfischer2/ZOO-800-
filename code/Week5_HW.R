@@ -36,17 +36,26 @@ file.info('Data/Output/fishcsvout.csv',
 #.xlsx size: ~14 kb (~18 kb in file viewer)
 
 
-fish_refined <- fishcsv %>%
-  filter(Species == c('Walleye', 'Yellow Perch', 'Smallmouth Bass'),
-         Lake == c('Erie', 'Michigan')) %>%
+fish_output <- fishcsv %>%
+  filter(Species %in% c('Walleye', 'Yellow Perch', 'Smallmouth Bass'),
+         Lake %in% c('Erie', 'Michigan')) %>%
   select(-Age_years) %>%
   mutate(Length_mm = Length_cm * 10) %>%
   mutate(Length_group = cut(Length_mm,
                             breaks = c(0, 200, 400, 600, Inf),
                             labels = c('<200mm', '200-400mm',
                                        '400-600mm','>600mm'),
-                            right = TRUE)
-  ) 
+                            right = TRUE) 
+  ) %>%
+  group_by(Species, Length_group) %>%
+  mutate(n = n()) %>%
+  group_by(Species, Lake) %>%
+  summarize(
+    mean_w = mean(Weight_g, na.rm = TRUE),
+    median_w = median(Weight_g, na.rm = TRUE),
+    total_w_g = sum(Weight_g, na.rm = TRUE),
+  )
+  
            
 ?cut
-
+?count
