@@ -172,3 +172,11 @@ cat("Serial elapsed (s):   ", round(elapsed_serial, 3), "\n")
 cat("Parallel elapsed (s): ", round(elapsed_parallel, 3), " using ", n_cores, " cores\n", sep = "")
 cat("Speedup:               ", round(speedup, 2), "x\n", sep = "")
 
+
+#Serial elapsed (s):    1.51 
+#Parallel elapsed (s): 0.42 using 11 cores
+#Speedup:               3.6x
+
+#The parallel ended up being about 3.6 times faster than in series.  There
+# was a funny moment where the series was faster due to a typo.  For a second
+# I was very confused, then laughed because of the improbability of it.
