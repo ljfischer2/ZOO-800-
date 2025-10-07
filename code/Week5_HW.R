@@ -113,7 +113,7 @@ species <- unique(fish$Species)            # list of species we'll loop over
 
 boot_mean <- function(species_name, n_boot = 500, sample_size = 100) {
   # Pull the Length_cm vector for just this species
-  x <- fish$Length_cm[fish$Species == species_name]
+  x <- fish$Weight_g[fish$Species == species_name]
   
   # Do n_boot resamples WITH replacement; compute the mean each time
   # replicate(...) returns a numeric vector of bootstrap means
