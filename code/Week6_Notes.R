@@ -55,6 +55,9 @@ plot9
 
 
 #In-class code practice
+
+library(tidyverse)
+library(palmerpenguins)
 peng <- penguins
 peng_noNA <- peng %>%
   filter(sex %in% c('male', 'female'))
