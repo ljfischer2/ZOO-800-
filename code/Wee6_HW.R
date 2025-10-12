@@ -77,4 +77,11 @@ sim_hist <- ggplot(sim_year_25, aes(x = pop_size)) +
   geom_vline(xintercept = 800)
 
 sim_hist                     
-       
+
+simtot <- sum(sim_year_25$pop_size > 800)
+
+sim_hist <- sim_hist + 
+  annotate("text",
+           x = 790, y = 3, 
+           label = paste("Count >", 800, ":", simtot, "/ 50"))
+sim_hist
