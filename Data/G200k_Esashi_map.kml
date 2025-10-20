@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document>
+    <name></name>
+    <description>山口 昇一, 須田 芳朗(1981) 枝幸,20万分の1地質図幅,NL-54-11,地質調査所</description>
+    <GroundOverlay>
+      <name>図郭-1</name>
+      <color>7fffffff</color>
+      <gx:altitudeMode>clampToSeaFloor</gx:altitudeMode>
+      <drawOrder>1</drawOrder>
+      <Icon>
+        <href>parts/G200k_Esashi_map_frame1.jpg</href>
+        <refreshMode>onInterval</refreshMode>
+        <refreshInterval>86400</refreshInterval>
+        <viewBoundScale>0.75</viewBoundScale>
+      </Icon>
+      <LatLonBox>
+        <north>45.33546576</north>
+        <south>44.66905053</south>
+        <east>142.99596540</east>
+        <west>141.99607240</west>
+        <rotation>0</rotation>
+      </LatLonBox>
+    </GroundOverlay>
+  </Document>
+</kml>

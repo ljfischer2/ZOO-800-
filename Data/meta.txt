@@ -1,0 +1,9 @@
+ID	Esashi
+タイトル	枝幸
+TITLE	ESASHI
+著者	山口 昇一, 須田 芳朗
+AUTHOR	YAMAGUCHI Shoichi, SUDA Yoshiro
+発行	地質調査所
+PUBLISHER	Geological Survey of Japan
+DATE	19810216
+NO	NL-54-11
