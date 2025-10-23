@@ -38,7 +38,7 @@ ggplot(sf2_jpn) +
 
 
 
--# Extra bits and bobs I found when trying to find any useful Japan data
+# Extra bits and bobs I found when trying to find any useful Japan data
 # TIF File ################
 #install.packages(c("terra", "raster", "tmap", "ggplot2"))
 #library(terra)    
