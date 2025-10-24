@@ -22,3 +22,5 @@ tam <- gbif %>%
 
 df <- collect(tam)
 summary(df)
+
+
