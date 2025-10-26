@@ -1,5 +1,7 @@
-install.packages('EDIutils')
+#install.packages('EDIutils')
 library(EDIutils)
+library(lubridate)
+library(tidyverse)
 
 
 # Package ID: edi.233.5 Cataloging System:https://pasta.edirepository.org.
@@ -423,6 +425,41 @@ dt6_yc <- dt6 %>%
 
 ggplot(dt6_yc, aes(x = year, y = yc)) + 
   geom_line()
+
+##---- graph 2---------#####
+
+dt2_2022<- dt2 %>% 
+  filter(SampleDate >= as.Date("2022-01-01"))
+
+#googled how to do this. secondary axis is not a normal thing w line plot in ggplot
+scaleFactor <- max(dt2_2022$DO, na.rm = TRUE) / max(dt2_2022$WaterTemp, na.rm = TRUE)
+
+ggplot(dt2_2022) +
+  # Primary y-axis: DO
+  geom_line(aes(x = Datetime, y = DO, color = "DO")) +
+  
+  # Secondary axis: Water Temperature (scaled)
+  #had to google how to do this
+  geom_line(aes(x = Datetime, y = WaterTemp * scaleFactor, color = "Water Temperature")) +
+  
+  scale_color_manual(values = c("DO" = "blue", "Water Temperature" = "red")) +
+  
+  #undoing the scaling factor so that values are accurate, but on secondary axis
+  scale_y_continuous(
+    name = "DO (mg/L)",
+    sec.axis = sec_axis(~ . / scaleFactor, name = "Water Temperature (°C)")
+  ) +
+  
+  labs(
+    x = "Time",
+    color = "Legend"
+  ) +
+  
+  theme_minimal() + #get rid of grey background
+  theme(
+    legend.position = c(0.95, 0.05),  #putting legend inside plot so it's less compressed
+    legend.justification = c("right", "bottom"),
+    legend.background = element_rect(fill = alpha("white", 0.3)))  #adding fill and transparency
     
   
 
