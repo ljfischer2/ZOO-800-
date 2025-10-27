@@ -390,6 +390,7 @@ detach(dt6)
 
 
 #EDA#######
+##---- graph 1---------#####
 dt6$year <- format(dt6$SampleDate, "%Y")
 
 # Convert to numeric (optional)
@@ -400,11 +401,9 @@ for (i in seq(1998:2024)) {
   dt6Fish <- dt6 %>%
       summarize(sum(Count[year == i]))
 }
-ggplot(dt6, aes(x = ))
 
-?unique
-?count
 
+#Checking if # of unique changes varies by year, or new spp added.
 dt6_1998 <- dt6 %>%
   filter(year == '1998')
 
@@ -414,20 +413,59 @@ dt6_2024 <- dt6 %>%
 
 sum(dt6$Count)
 
-length(unique(dt6_1999$OrganismCode))
-length(unique(dt6_2002$OrganismCode))
+length(unique(dt6_1998$OrganismCode)) 
+length(unique(dt6_2024$OrganismCode))
+# only one spp added in 25 years.  not really worth looking at
 
-dt6_yc <- dt6 %>%
+
+# What if we look at how total catch varies by year?
+dt6_yc <- dt6 %>% # summarise data so that only total counts present
   group_by(year) %>%
   summarise(yc = sum(Count, na.rm = TRUE))
 
 
 
 ggplot(dt6_yc, aes(x = year, y = yc)) + 
-  geom_line()
+  geom_line(size = 0.75, color = "darkred") + 
+  labs(x = "Year",
+       y = "Total Count") + 
+  theme_minimal()
+
+# 2012 has a very strong count for that year, almost double any other year
 
 ##---- graph 2---------#####
 
+#filter to only 2012 to see why
+dt6_2012 <- dt6 %>%
+  filter(year == '2012')
+
+#If we look at the dataframe, we see that fish SHR was caught in extreme
+# amounts that year.  How does this compare to other years?
+
+#filter to only SHR fish
+dt6_SHR <- dt6 %>%
+   filter(OrganismCode == "SHR") %>%
+  select(OrganismCode,
+         Count,
+         year)
+
+dt6_SHRyc <- dt6_SHR %>% # summarise data so that only total counts present
+  group_by(year) %>%
+  summarise(yc = sum(Count, na.rm = TRUE))  
+
+
+#plot against the total catch
+ggplot() +
+  geom_line(data = dt6_SHRyc, aes(x = year, y = yc, color = "SHR")) +
+  geom_line(data = dt6_yc, aes(x = year, y = yc, color = "Total")) +
+  scale_color_manual(
+    name = "Catch",
+    values = c("SHR" = "red", "Total" = "blue")) +
+  labs(x = "Year", y = "Total Count") +
+  theme_minimal()
+  
+  
+##---- graph 3---------#####
 dt2_2022<- dt2 %>% 
   filter(SampleDate >= as.Date("2022-01-01"))
 
@@ -462,4 +500,30 @@ ggplot(dt2_2022) +
     legend.background = element_rect(fill = alpha("white", 0.3)))  #adding fill and transparency
     
   
+##---- graph 4 + 5---------#####
+# Do Ebb or Flood tides have higher conductivity?
 
+dt2_cnd <- dt2 %>% #remove all extra variables, then remove NAs
+  select(Tide, Conductivity) %>%
+  filter(Tide == "Flood" | Tide == 'Ebb')
+
+ggplot(dt2_cnd, aes(x = Tide, y = Conductivity, fill = Tide)) + 
+  geom_boxplot() + 
+  scale_fill_brewer(palette = 'Set1') + 
+  labs(x = 'Tide Type',
+       y = 'Conductivity')
+
+# not much difference, what about secchi depth?
+
+dt2_sec <- dt2 %>% #remove all extra variables, then remove NAs
+  select(Tide, Secchi) %>%
+  filter(Tide == "Flood" | Tide == 'Ebb')
+
+ggplot(dt2_sec, aes(x = Tide, y = Secchi, fill = Tide)) + 
+  geom_boxplot() + 
+  scale_fill_brewer(palette = 'Set1') +
+  labs(x = 'Tide Type',
+       y = 'Secchi Depth (m)')
+
+# Again, not much difference to be seen, but a lot of outliers.  Might 
+# be worth looking into at some point
