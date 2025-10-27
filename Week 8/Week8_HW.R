@@ -466,14 +466,17 @@ ggplot() +
   
   
 ##---- graph 3---------#####
+#plotting DO vs water temp to see typical ranges and whether there is inverse relationship as expected
+
 dt2_2022<- dt2 %>% 
-  filter(SampleDate >= as.Date("2022-01-01"))
+  filter(SampleDate >= as.Date("2022-01-01")) #filtering to dates 2022 and later
 
 #googled how to do this. secondary axis is not a normal thing w line plot in ggplot
+#had to create scaleFactor outside of plot bc ggplot didn't recognize it otherwise
 scaleFactor <- max(dt2_2022$DO, na.rm = TRUE) / max(dt2_2022$WaterTemp, na.rm = TRUE)
 
-ggplot(dt2_2022) +
-  # Primary y-axis: DO
+ggplot(dt2_2022) + #plotting from the filtered dataframe
+  #Primary y-axis: DO
   geom_line(aes(x = Datetime, y = DO, color = "DO")) +
   
   # Secondary axis: Water Temperature (scaled)
@@ -496,10 +499,12 @@ ggplot(dt2_2022) +
   theme_minimal() + #get rid of grey background
   theme(
     legend.position = c(0.95, 0.05),  #putting legend inside plot so it's less compressed
-    legend.justification = c("right", "bottom"),
+    legend.justification = c("right", "bottom"), #placing it at bottom right corner
     legend.background = element_rect(fill = alpha("white", 0.3)))  #adding fill and transparency
     
-  
+#data is noisy, but shows that DO is lowest in late summer when water temp is highest
+
+
 ##---- graph 4 + 5---------#####
 # Do Ebb or Flood tides have higher conductivity?
 
