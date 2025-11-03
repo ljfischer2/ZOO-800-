@@ -82,12 +82,14 @@ pbeta(0.55, 5, 1)
 
 
 
-set.seed(81)
+set.seed(81) #using seed 81 because.  Also to make same graph every time.
 
 
 
-probs <- matrix(nrow = 100, ncol = 20)
+probs <- matrix(nrow = 100, ncol = 20) #Making a matrix seems like the best option
 
+
+# Using a for loop to simulate # of coins flipped.
 for (i in 1:20) {
   probs[, i] <- replicate(100, {
     heads <- rbinom(1, i, 0.6)
@@ -95,16 +97,23 @@ for (i in 1:20) {
   })
 }
 
+#convert it to a data frame so we can pivot the table.
 probsdf <- as.data.frame(probs)
 colnames(probsdf) <- paste0(1:20)
-probsdf$sim <- 1:100
+probsdf$sim <- 1:100 #Also adding what sim #.
 
 probs_longer <- probsdf %>%
   pivot_longer(cols = !'sim', 
                names_to = "num_of_flips", values_to = "probability")
 
+
+# At this point, I got a little lost and needed some help with AI.
 probs_longer$num_of_flips <- as.numeric(gsub("n_", "", probs_longer$num_of_flips))
 
+#Grouping by number of flips, then summarizing.  I got stuck here
+# as I was visualizing the problem, since I was going to try and plot all of
+# the results, rather than summarizing them.  I think this is porbably the 
+# more efficient way of doing this.
 results_summary <- probs_longer %>%
   group_by(num_of_flips) %>%
   summarise(prop_significant = mean(probability < 0.05))
@@ -118,7 +127,9 @@ ggplot(results_summary, aes(x = num_of_flips, y = prop_significant * 100)) +
   ) +
   theme_minimal(base_size = 14)
 
-
+# Rinse and repeat for the next two probabilities as well.
+#I probably could do this either in a function or in a loop, looking at it now,
+# but for 3 probabilities this was the easiest option
 
 probs2 <- matrix(nrow = 100, ncol = 20)
 
@@ -170,11 +181,13 @@ results3_summary <- probs3_longer %>%
   group_by(num_of_flips) %>%
   summarise(prop_significant = mean(probability < 0.05))
 
-
+#At this point, I added the results of the higher probabilities to the 
+# original results to make it easier to graph.
 results_summary$test2 <- results2_summary$prop_significant
 results_summary$test3 <- results3_summary$prop_significant
 
 
+#Good stoplight colors seemed appropriate here.
 ggplot(results_summary, aes(x = num_of_flips, y = prop_significant * 100)) +
   geom_line(color = "green", linewidth = 1) +
   geom_line(aes(x = num_of_flips, y = test2 * 100),
@@ -190,6 +203,9 @@ ggplot(results_summary, aes(x = num_of_flips, y = prop_significant * 100)) +
 
 
 
+
+
+# Extra Code Bits that I was working with ############
 
 #sig_results <- numeric(length(1:20))
 
