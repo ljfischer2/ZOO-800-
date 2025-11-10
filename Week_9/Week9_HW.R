@@ -188,17 +188,18 @@ results_summary$test3 <- results3_summary$prop_significant
 
 
 #Good stoplight colors seemed appropriate here.
-ggplot(results_summary, aes(x = num_of_flips, y = prop_significant * 100)) +
-  geom_line(color = "green", linewidth = 1) +
-  geom_line(aes(x = num_of_flips, y = test2 * 100),
-            color = "yellow", linewidth = 1) + 
-  geom_line(aes(x = num_of_flips, y = test3 * 100),
-            color = "red", linewidth = 1) +
-  labs(
-    
-    x = "# of Coin Flips",
-    y = "% detection)"
-  ) +
+ggplot(results_summary, aes(x = num_of_flips, y = prop_significant * 100,
+                            color = "Test1")) +
+  geom_line(linewidth = 1) +
+  geom_line(aes(x = num_of_flips, y = test2 * 100,  color = "Test2"),
+            linewidth = 1) + 
+  geom_line(aes(x = num_of_flips, y = test3 * 100, color = "Test3"),
+           linewidth = 1) +
+  labs(x = "# of Coin Flips",
+    y = "% detection") +
+  scale_color_manual(
+    name = "Legend Title",
+    values = c("Test 1" = "green", "Test 2" = "yellow", "Test 3" = "red")) +
   theme_minimal(base_size = 14)
 
 
