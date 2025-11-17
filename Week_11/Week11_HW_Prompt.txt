@@ -1,0 +1,7 @@
+#Congrats, you are in charge of a fish hatchery.  You have  phenotypes of true-
+# breeding brook trout.  Your fishermen want trout stocked that are easier to 
+# catch, because they suck.  Besides there are stupid naming conventions that
+# are usual for strains of trout, you refer to them as snub-nose and round-nose
+# trout.  Find the hungrier trout (those that have a higher feeding rate)
+
+#Do brook trout vary in feeding rate based on the length of their mouth?

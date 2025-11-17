@@ -32,7 +32,8 @@ predict(mod1, newdata = list(Avg_temp = c(0.0076, 0.01087)),
 # bound, 
 
 
-#### Objective 2 #########################################################
+#### Objective 2 ########################################################
+#
 
 #setup of our original data
 x <- rnorm(100, 10, 3)
@@ -50,7 +51,7 @@ df_loop <- data.frame(x = x)
 
 #and our for loop:
 for (i in 1:100) { 
-  ey <- rlnorm(100, i*0.05, 0.4)
+  ey <- rlnorm(100, i*0.05, 0.4) #THIS SHOULD BE ON DEV, NOT MEAN
   yran <- y + ey
   df_loop$yran <- yran
   mods[[i]] <- lm(yran ~ x, data = df_loop)
