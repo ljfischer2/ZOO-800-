@@ -40,13 +40,14 @@
 #par(mfrow = c(1,1))
 
 set.seed(71)
-dfx <- data.frame(Mouth_Length = c(rnorm(106,270,10),rnorm(107, 250, 10)),
-  Feed_Rate = c(rnorm(106, 75, 10),rnorm(107, 80, 10)))
+dfx <- data.frame(Mouth_Length = c(rnorm(106,260,10),rnorm(107, 250, 10)),
+  Feed_Rate = c(rnorm(106, 75, 3),rnorm(107, 80, 3)))
 dfx$Mouth_Type <- "Round"
 dfx$Mouth_Type[107:213] <- "Snub"
 
-ggplot(dfx, aes(x = Mouth_Length, y = Feed_Rate)) + 
-  geom_point()
+ggplot(dfx, aes(x = Mouth_Length, y = Feed_Rate, color = Mouth_Type)) + 
+  geom_point()+ 
+  geom_smooth(method = 'lm', se = FALSE)
 
 mod1 <- lm(Feed_Rate~Mouth_Length*Mouth_Type, data = dfx)
 mod2 <- lm(Feed_Rate~Mouth_Length, data = dfx)
@@ -55,6 +56,8 @@ autoplot(mod1)
 autoplot(mod2)
 summary(mod1)
 summary(mod2)
+
+
 
 write.csv(x = dfx, file = "Week_11/trout_feeding.csv", )
 
